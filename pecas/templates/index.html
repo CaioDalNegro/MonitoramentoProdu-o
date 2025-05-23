@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Controle de Peças</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -42,11 +41,14 @@
             <button type="submit">Cadastrar</button>
         </form>
 
-        <ul id="listaPecas">
+        <!-- <ul id="listaPecas">
             {% for peca in pecas %}
             <li><strong>{{ peca.nome }}</strong> usado em <em>{{ peca.veiculo }}</em></li>
             {% endfor %}
-        </ul>
+        </ul>         -->
+        <ul id="listaPecas">
+            <li><strong>Parafuso</strong> usado em <em>Caminhão</em></li>
+        </ul>        
     </div>
 
     <footer>

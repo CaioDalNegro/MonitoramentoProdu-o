@@ -1,0 +1,53 @@
+version: "3.8"
+
+services:
+  producao:
+    build: ./producao
+    container_name: ms_producao
+    ports:
+      - "5001:5000"
+    networks:
+      - m2m_network
+
+  qualidade:
+    build: ./qualidade
+    container_name: ms_qualidade
+    ports:
+      - "5002:5000"
+    depends_on:
+      - producao
+      - certificadora
+    networks:
+      - m2m_network
+
+  pecas:
+    build: ./pecas
+    container_name: ms_pecas
+    ports:
+      - "5003:5000"
+    networks:
+      - m2m_network
+
+  relatorios:
+    build: ./relatorios
+    container_name: ms_relatorios
+    ports:
+      - "5004:5000"
+    depends_on:
+      - producao
+      - qualidade
+      - pecas
+    networks:
+      - m2m_network
+
+  certificadora:
+    build: ./certificadora_externa
+    container_name: ms_certificadora
+    ports:
+      - "5005:5000"
+    networks:
+      - m2m_network
+
+networks:
+  m2m_network:
+    driver: bridge

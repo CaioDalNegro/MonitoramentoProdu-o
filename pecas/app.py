@@ -3,7 +3,10 @@ from flask import Flask, request, jsonify, render_template
 app = Flask(__name__)
 
 #Array para armazenar em memoria
-pecas = []
+pecas = [
+        {"nome": "Parafuso 10mm", "veiculo": "Caminhão A"},
+        {"nome": "Filtro de ar", "veiculo": "Carro B"}
+    ]
 
 @app.route("/")
 def home():

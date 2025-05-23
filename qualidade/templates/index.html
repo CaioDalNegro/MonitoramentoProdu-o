@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Inspeção de Qualidade</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Registro de Inspeção</h1>
+
+        <form id="form-qualidade">
+            <input type="text" name="peca" placeholder="Número da Peça" required>
+            <select name="resultado" required>
+                <option value="">Resultado da Inspeção</option>
+                <option value="Aprovado">Aprovado</option>
+                <option value="Reprovado">Reprovado</option>
+            </select>
+            <input type="text" name="observacao" placeholder="Observações (opcional)">
+            <button type="submit">Registrar</button>
+        </form>
+
+        <h2>Inspeções Registradas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Peça</th>
+                    <th>Resultado</th>
+                    <th>Observação</th>
+                </tr>
+            </thead>
+            <tbody id="tabela-inspecao">
+                {% for item in inspecoes %}
+                <tr>
+                    <td>{{ item.peca }}</td>
+                    <td>{{ item.resultado }}</td>
+                    <td>{{ item.observacao }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Etapas de Produção (via serviço Produção)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Etapa</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for etapa in producao %}
+                <tr>
+                    <td>{{ etapa.etapa }}</td>
+                    <td>{{ etapa.status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const form = document.getElementById('form-qualidade');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const response = await fetch('/registrar', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            if (data.dados) {
+                const tabela = document.getElementById('tabela-inspecao');
+                tabela.innerHTML = '';
+                data.dados.forEach(item => {
+                    tabela.innerHTML += `<tr>
+                        <td>${item.peca}</td>
+                        <td>${item.resultado}</td>
+                        <td>${item.observacao}</td>
+                    </tr>`;
+                });
+                form.reset();
+            }
+        });
+    </script>
+</body>
+</html>

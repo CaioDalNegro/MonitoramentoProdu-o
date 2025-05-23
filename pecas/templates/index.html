@@ -41,19 +41,47 @@
             <button type="submit">Cadastrar</button>
         </form>
 
-        <!-- <ul id="listaPecas">
+        <ul id="listaPecas">
             {% for peca in pecas %}
             <li><strong>{{ peca.nome }}</strong> usado em <em>{{ peca.veiculo }}</em></li>
             {% endfor %}
-        </ul>         -->
-        <ul id="listaPecas">
-            <li><strong>Parafuso</strong> usado em <em>Caminhão</em></li>
         </ul>        
+        <!-- <ul id="listaPecas">
+            <li><strong>Parafuso</strong> usado em <em>Caminhão</em></li>
+        </ul>         -->
     </div>
 
     <footer>
         © 2025 AutoLink Motors
     </footer>      
 </body>
+
+<script>
+        document.getElementById("pecaForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const nome = document.getElementById("nome").value;
+            const veiculo = document.getElementById("veiculo").value;
+
+            fetch("/api/pecas", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ nome: nome, veiculo: veiculo })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const li = document.createElement("li");
+                li.innerHTML = `<strong>${data.nome}</strong> usado em <em>${data.veiculo}</em>`;
+                document.getElementById("listaPecas").appendChild(li);
+                document.getElementById("nome").value = "";
+                document.getElementById("veiculo").value = "";
+            })
+            .catch(error => {
+                console.error("Erro ao cadastrar peça:", error);
+            });
+        });
+    </script>
 
 </html>

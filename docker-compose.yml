@@ -41,7 +41,7 @@ services:
       - m2m_network
 
   certificadora:
-    build: ./certificadora
+    build: ./certificadora_externa
     container_name: ms_certificadora
     ports:
       - "5005:5000"

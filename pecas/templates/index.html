@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Controle de Peças</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Produção</a></li>
+            <li><a href="#">Peças</a></li>
+            <li><a href="#">Qualidade</a></li>
+            <li><a href="#">Relatórios</a></li>
+        </ul>
+    </nav>
+
+    <!-- Landing Page -->
+    <header class="hero">
+        <div class="overlay"></div>
+        <div class="info">
+            <h1>Bem-vindo ao Sistema de Rastreamento de Peças</h1>
+            <p>Gerencie de forma eficiente os componentes usados na linha de produção da AutoLink Motors.</p>
+        </div>
+    </header>
+
+    <!-- Seção de sobre -->
+    <section class="Sobre">
+        <h2>Sobre o Sistema</h2>
+        <p>Este sistema foi desenvolvido para facilitar o controle e rastreamento dos componentes utilizados na fabricação de veículos, garantindo qualidade e eficiência em cada etapa da produção.</p>
+    </section>
+
+    <!-- Formulário de cadastro -->
+    <div class="container">
+        <h2>Cadastro de Componentes</h2>
+        <form id="pecaForm">
+            <input type="text" id="nome" placeholder="Nome da peça" required>
+            <input type="text" id="veiculo" placeholder="Veículo" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+
+        <ul id="listaPecas">
+            {% for peca in pecas %}
+            <li><strong>{{ peca.nome }}</strong> usado em <em>{{ peca.veiculo }}</em></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <footer>
+        © 2025 AutoLink Motors
+    </footer>      
+</body>
+
+</html>

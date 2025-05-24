@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Produção - AutoLink</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Monitoramento da Produção</h1>
+
+        <form id="form-producao">
+            <input type="text" name="etapa" placeholder="Etapa de Montagem" required>
+            <input type="text" name="status" placeholder="Status (Ex: Concluído, Pendente)" required>
+            <button type="submit">Registrar</button>
+        </form>
+
+        <h2>Registros</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Etapa</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="tabela-producao">
+                {% for item in dados %}
+                <tr>
+                    <td>{{ item.etapa }}</td>
+                    <td>{{ item.status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const form = document.getElementById('form-producao');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const response = await fetch('/registrar', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            if (data.dados) {
+                const tabela = document.getElementById('tabela-producao');
+                tabela.innerHTML = '';
+                data.dados.forEach(item => {
+                    tabela.innerHTML += `<tr><td>${item.etapa}</td><td>${item.status}</td></tr>`;
+                });
+                form.reset();
+            }
+        });
+    </script>
+</body>
+</html>

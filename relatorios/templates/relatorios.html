@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatórios</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Gráfico de Produção</h2>
+    <canvas id="graficoProducao" width="400" height="200"
+        data-dias='{{ dias | tojson | safe }}'
+        data-producao='{{ producao_diaria | tojson | safe }}'>
+    </canvas>
+
+    <h2>Gráfico de Peças por Veículo</h2>
+    <canvas id="graficoPecas" width="400" height="200"
+        data-nomes='{{ nomes_veiculos | tojson | safe }}'
+        data-contagem='{{ contagem_pecas | tojson | safe }}'>
+    </canvas>
+
+    <!-- Aqui carrega seu script JS externo -->
+    <script src="{{ url_for('static', filename='js/graficos.js') }}"></script>
+</body>
+</html>

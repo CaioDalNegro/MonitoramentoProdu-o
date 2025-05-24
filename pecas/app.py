@@ -1,26 +1,28 @@
 from flask import Flask, request, jsonify, render_template
-from pecas_data import listar_pecas, adicionar_peca
 
 app = Flask(__name__)
 
+#Array para armazenar em memoria
+pecas = []
+
 @app.route("/")
 def home():
-    pecas = listar_pecas()
     return render_template("index.html", pecas=pecas)
 
 @app.route("/api/pecas", methods=["GET"])
-def api_listar_pecas():
-    return jsonify(listar_pecas())
+def listar_pecas():
+    return jsonify(pecas)
 
 @app.route("/api/pecas", methods=["POST"])
-def api_adicionar_peca():
+def adicionar_peca():
     data = request.json
-    nome = data.get("nome")
-    veiculo = data.get("veiculo")
-    if not nome or not veiculo:
-        return jsonify({"erro": "Campos 'nome' e 'veiculo' são obrigatórios."}), 400
-    nova_peca = adicionar_peca(nome, veiculo)
+    nova_peca = {
+        "id": len(pecas) + 1,
+        "nome": data["nome"],
+        "veiculo": data["veiculo"]
+    }
+    pecas.append(nova_peca)
     return jsonify(nova_peca), 201
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0")

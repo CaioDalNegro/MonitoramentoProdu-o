@@ -29,5 +29,10 @@ def registrar():
         return jsonify({'mensagem': 'Inspeção registrada com sucesso!', 'dados': inspecoes})
     return jsonify({'erro': 'Dados inválidos'}), 400
 
+# ✅ NOVA ROTA JSON
+@app.route('/api/qualidade', methods=['GET'])
+def api_qualidade():
+    return jsonify(inspecoes)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0')

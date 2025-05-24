@@ -5,45 +5,38 @@ app = Flask(__name__)
 
 @app.route("/")
 def relatorios():
-    # URLs dos outros serviços (exemplo)
-    url_producao = "http://localhost:5001/api/producao"
-    url_pecas = "http://localhost:5002/api/pecas"
-    url_qualidade = "http://localhost:5003/api/qualidade"
+    # Simulação dos dados de peças (substituindo a chamada ao serviço externo)
+    dados_pecas = [
+        {"id": 1, "nome": "Mancal", "veiculo": "HB20"},
+        {"id": 2, "nome": "Filtro de óleo", "veiculo": "HB20"},
+        {"id": 3, "nome": "Filtro de ar", "veiculo": "Onix"},
+        {"id": 4, "nome": "Pastilha", "veiculo": "Onix"},
+        {"id": 5, "nome": "Parachoque", "veiculo": "Fiesta"},
+        {"id": 6, "nome": "Farol", "veiculo": "HB20"},
+    ]
 
-    try:
-        resp_producao = requests.get(url_producao)
-        dados_producao = resp_producao.json() if resp_producao.status_code == 200 else {}
+    # Simulação dos dados de produção
+    dados_producao = {
+        "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+        "producao_diaria": [10, 20, 15, 12, 18]
+    }
 
-        resp_pecas = requests.get(url_pecas)
-        dados_pecas = resp_pecas.json() if resp_pecas.status_code == 200 else {}
+    # Simulação dos dados de qualidade vazia só pra não quebrar
+    dados_qualidade = {}
 
-        resp_qualidade = requests.get(url_qualidade)
-        dados_qualidade = resp_qualidade.json() if resp_qualidade.status_code == 200 else {}
+    # Contagem das peças por veículo
+    contagem_pecas_dict = {}
+    for peca in dados_pecas:
+        veiculo = peca.get('veiculo')
+        if veiculo:
+            contagem_pecas_dict[veiculo] = contagem_pecas_dict.get(veiculo, 0) + 1
 
-    except Exception as e:
-        # Em caso de erro, pode logar e setar dados vazios
-        dados_producao = {}
-        dados_pecas = {}
-        dados_qualidade = {}
-
-    # Aqui você consolida os dados para o template
-    # Por exemplo:
-    dias = dados_producao.get('dias', ["Seg", "Ter", "Qua", "Qui", "Sex"])
-    producao_diaria = dados_producao.get('producao_diaria', [10, 20, 15, 12, 18])
-
-    nomes_veiculos = [peca['veiculo'] for peca in dados_pecas]
-    contagem_pecas = {}
-    for v in nomes_veiculos:
-        contagem_pecas[v] = contagem_pecas.get(v, 0) + 1
-
-    nomes_veiculos = list(contagem_pecas.keys())
-    contagem_pecas = list(contagem_pecas.values())
-
-    # Você pode também incluir dados da qualidade, conforme seu modelo
+    nomes_veiculos = list(contagem_pecas_dict.keys())
+    contagem_pecas = list(contagem_pecas_dict.values())
 
     return render_template("relatorios.html",
-                           dias=dias,
-                           producao_diaria=producao_diaria,
+                           dias=dados_producao['dias'],
+                           producao_diaria=dados_producao['producao_diaria'],
                            nomes_veiculos=nomes_veiculos,
                            contagem_pecas=contagem_pecas,
                            dados_qualidade=dados_qualidade)

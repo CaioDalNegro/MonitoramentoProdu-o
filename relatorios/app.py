@@ -2,7 +2,7 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-@app.route("/relatorios")
+@app.route("/")
 def relatorios():
     dias = ["Seg", "Ter", "Qua", "Qui", "Sex"]
     producao_diaria = [10, 20, 15, 12, 18]
@@ -16,4 +16,4 @@ def relatorios():
                            contagem_pecas=contagem_pecas)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')

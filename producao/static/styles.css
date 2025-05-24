@@ -1,9 +1,107 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
-    padding: 20px;
-    margin: 0;
 }
+
+/* Navbar----------------------------------------------------------------------*/
+.navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+    background: transparent;
+}
+
+.navbar ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-start;
+    background-color: transparent;
+}
+
+.navbar a {
+    display: block;
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.navbar a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+/* Hero Section--------------------------------------------------------------------*/
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: url("../static/fabrica.png") no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+.hero .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* Texto acima da imagem */
+.info {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 20px;
+}
+
+/* Estilos de texto */
+.info h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.info p {
+    font-size: 1.5em;
+}
+
+/* section sobre----------------------------------------------------------------*/
+.Sobre {
+    padding: 60px 20px;
+    max-width: 100%;
+    margin: 0 auto; /* centraliza a section */
+    text-align: center;
+  }
+  
+  .Sobre h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #004080;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  
+  .Sobre p {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: #333;
+  }
 
 .container {
     background-color: #fff;
@@ -66,4 +164,12 @@ th, td {
     margin-top: 10px;
     font-weight: bold;
     color: green;
+}
+
+footer{
+    background:#333; 
+    color:#fff; 
+    text-align:center; 
+    padding:10px 0; 
+    font-size:14px;
 }

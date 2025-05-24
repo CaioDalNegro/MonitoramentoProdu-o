@@ -6,6 +6,32 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="#">Produção</a></li>
+            <li><a href="#">Peças</a></li>
+            <li><a href="#">Qualidade</a></li>
+            <li><a href="#">Relatórios</a></li>
+        </ul>
+    </nav>
+
+    <!-- Landing Page -->
+    <header class="hero">
+        <div class="overlay"></div>
+        <div class="info">
+            <h1>Bem-vindo ao Sistema de Rastreamento de Peças</h1>
+            <p>Gerencie de forma eficiente os componentes usados na linha de produção da AutoLink Motors.</p>
+        </div>
+    </header>
+
+    <!-- Seção de sobre -->
+    <section class="Sobre">
+        <h2>Sobre o Sistema</h2>
+        <p>Este sistema foi desenvolvido para facilitar o controle e rastreamento dos componentes utilizados na fabricação de veículos, garantindo qualidade e eficiência em cada etapa da produção.</p>
+    </section>
+    
     <div class="container">
         <h1>Monitoramento da Produção</h1>
 
@@ -33,6 +59,10 @@
             </tbody>
         </table>
     </div>
+
+    <footer>
+        © 2025 AutoLink Motors
+    </footer> 
 
     <script>
         const form = document.getElementById('form-producao');

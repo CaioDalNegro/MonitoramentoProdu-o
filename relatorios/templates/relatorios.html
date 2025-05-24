@@ -1,25 +1,60 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Relatórios</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Relatórios - Monitoramento</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h2>Gráfico de Produção</h2>
-    <canvas id="graficoProducao" width="400" height="200"
-        data-dias='{{ dias | tojson | safe }}'
-        data-producao='{{ producao_diaria | tojson | safe }}'>
-    </canvas>
 
-    <h2>Gráfico de Peças por Veículo</h2>
-    <canvas id="graficoPecas" width="400" height="200"
-        data-nomes='{{ nomes_veiculos | tojson | safe }}'
-        data-contagem='{{ contagem_pecas | tojson | safe }}'>
-    </canvas>
+  <!-- Header / Capa -->
+  <header class="header-capa">
+    <div class="container">
+      <h1>Monitoramento de Produção</h1>
+      <p>Visualize os principais indicadores de produção e peças em tempo real.</p>
+    </div>
+  </header>
 
-    <!-- Aqui carrega seu script JS externo -->
-    <script src="{{ url_for('static', filename='js/graficos.js') }}"></script>
+  <!-- Área principal -->
+  <main class="container">
+
+    <!-- Gráficos -->
+    <section id="graficos" class="graficos">
+      <div class="grafico-wrapper">
+        <h2>Gráfico de Produção</h2>
+        <canvas id="graficoProducao"
+          data-dias='{{ dias | tojson | safe }}'
+          data-producao='{{ producao_diaria | tojson | safe }}'>
+        </canvas>
+      </div>
+
+      <div class="grafico-wrapper">
+        <h2>Gráfico de Peças por Veículo</h2>
+        <canvas id="graficoPecas"
+          data-nomes='{{ nomes_veiculos | tojson | safe }}'
+          data-contagem='{{ contagem_pecas | tojson | safe }}'>
+        </canvas>
+      </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre" class="sobre">
+      <h2>Sobre Este Sistema</h2>
+      <p>
+        Este sistema foi desenvolvido para monitorar em tempo real a produção e a quantidade de peças por veículo,
+        facilitando a análise e tomada de decisões para melhoria contínua na fábrica.
+      </p>
+      <p>
+        Os dados apresentados são atualizados automaticamente e exibidos em gráficos interativos para melhor visualização.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/graficos.js') }}"></script>
+
 </body>
 </html>

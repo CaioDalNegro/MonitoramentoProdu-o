@@ -1,21 +1,89 @@
-.cards {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin: 20px 0;
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.card {
-    background: #343a40;
-    color: #fff;
-    padding: 20px;
-    border-radius: 10px;
+/* Fonte e corpo */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #212529;
+    line-height: 1.6;
+    background: #f4f7f9;
+    min-height: 100vh;
+}
+
+/* Container para limitar largura e centralizar */
+.container {
+    max-width: 960px;
+    width: 90%;
+    margin: 20px auto;
+}
+
+/* Header / Capa */
+.header-capa {
+    background: linear-gradient(135deg, #282828, #5f5b5b);
+    color: white;
+    padding: 60px 20px;
     text-align: center;
-    width: 220px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.header-capa h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.header-capa p {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+/* Títulos das seções */
+h2 {
+    margin-bottom: 18px;
+    font-weight: 700;
+    color: #212529;
+    text-align: center;
+}
+
+/* Seção dos gráficos: layout flex com gap */
 .graficos {
-    padding: 20px;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+}
+
+/* Container individual para cada gráfico */
+.grafico-wrapper {
+    flex: 1 1 45%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    padding: 25px 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* Canvas dos gráficos: largura fluida e altura proporcional */
+canvas {
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 8px;
+}
+
+/* Seção Sobre */
+.sobre {
+    padding: 30px 25px;
+    border-radius: 15px;
+    max-width: 100%;
+    margin: 0 auto 60px;
     text-align: center;
+    color: #444;
+    font-size: 1.1rem;
+    line-height: 1.8;
 }
